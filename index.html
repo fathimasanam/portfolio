@@ -290,11 +290,11 @@
   <div class="nav-inner">
     <div class="logo" onclick="window.scrollTo({top:0,behavior:'smooth'})">FS·</div>
     <ul class="nav-links" id="desktop-nav">
-      <li><button onclick="scrollTo('about')" class="active" data-nav="about">About</button></li>
-      <li><button onclick="scrollTo('skills')" data-nav="skills">Skills</button></li>
-      <li><button onclick="scrollTo('experience')" data-nav="experience">Experience</button></li>
-      <li><button onclick="scrollTo('projects')" data-nav="projects">Projects</button></li>
-      <li><button onclick="scrollTo('contact')" data-nav="contact">Contact</button></li>
+      <li><button onclick="navScrollTo('about')" class="active" data-nav="about">About</button></li>
+      <li><button onclick="navScrollTo('skills')" data-nav="skills">Skills</button></li>
+      <li><button onclick="navScrollTo('experience')" data-nav="experience">Experience</button></li>
+      <li><button onclick="navScrollTo('projects')" data-nav="projects">Projects</button></li>
+      <li><button onclick="navScrollTo('contact')" data-nav="contact">Contact</button></li>
     </ul>
     <button class="hamburger" id="ham-btn" onclick="toggleMenu()" aria-label="Menu">
       <span class="ham-bar" id="bar1"></span>
@@ -305,11 +305,11 @@
 </nav>
 
 <div class="mobile-menu" id="mobile-menu">
-  <button onclick="scrollTo('about');closeMenu()">About</button>
-  <button onclick="scrollTo('skills');closeMenu()">Skills</button>
-  <button onclick="scrollTo('experience');closeMenu()">Experience</button>
-  <button onclick="scrollTo('projects');closeMenu()">Projects</button>
-  <button onclick="scrollTo('contact');closeMenu()">Contact</button>
+  <button onclick="navScrollTo('about');closeMenu()">About</button>
+  <button onclick="navScrollTo('skills');closeMenu()">Skills</button>
+  <button onclick="navScrollTo('experience');closeMenu()">Experience</button>
+  <button onclick="navScrollTo('projects');closeMenu()">Projects</button>
+  <button onclick="navScrollTo('contact');closeMenu()">Contact</button>
 </div>
 
 <!-- HERO -->
@@ -323,8 +323,8 @@
         <h1 class="hero-name" id="typewriter-target" style="font-size:clamp(2.8rem,6vw,5.5rem);"></h1>
         <p class="hero-bio" style="opacity:0;animation:fadeUp 0.7s 0.45s forwards;">Analytical B.Tech student at VISAT Engineering College with a growing portfolio in programming and data-driven problem solving. Passionate about immersive technologies and proven to work effectively in collaborative, cross-functional environments.</p>
         <div class="hero-cta" style="opacity:0;animation:fadeUp 0.7s 0.6s forwards;">
-          <button class="btn-primary" onclick="scrollTo('experience')">See My Work</button>
-          <button class="btn-outline" onclick="scrollTo('contact')">Get in Touch</button>
+          <button class="btn-primary" onclick="navScrollTo('experience')">See My Work</button>
+          <button class="btn-outline" onclick="navScrollTo('contact')">Get in Touch</button>
         </div>
         <div class="hero-stats" style="opacity:0;animation:fadeUp 0.7s 0.75s forwards;">
           <div><div class="stat-num">NASA</div><div class="stat-label">Hackathon</div></div>
@@ -353,7 +353,7 @@
 </section>
 
 <!-- SKILLS -->
-<div class="alt-bg">
+<div id="skills" class="alt-bg">
   <div class="section-wrap">
     <div class="section-inner">
       <div class="reveal">
@@ -653,8 +653,12 @@
   }
 
   /* ---- SMOOTH SCROLL ---- */
-  function scrollTo(id) {
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
+  function navScrollTo(id) {
+    const target = document.getElementById(id);
+    if (target) {
+      const top = target.getBoundingClientRect().top + window.scrollY - 64;
+      window.scrollTo({ top, behavior: "smooth" });
+    }
   }
 
   /* ---- MOBILE MENU ---- */
